@@ -4,13 +4,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
     form.addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the default form submission
 
-        // Simulate form submission (you can replace this with actual form submission logic)
-        alert('Form submitted!');
+        // Submit the form data to the backend
+        const formData = new FormData(form);
 
-        // Reset the form
-        form.reset();
-
-        // Redirect to the Reemo hub page
-        window.location.href = 'https://www.reemohub.com'; // Update this URL to the actual Reemo hub page URL
+        fetch('/submit-form', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert('Form submitted successfully!');
+            form.reset(); // Reset the form
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error submitting the form. Please try again.');
+        });
     });
 });
