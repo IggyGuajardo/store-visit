@@ -8,25 +8,74 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>AR Observation Form</h1>
+    <h1>Reemo Store Visit Form</h1>
     <form id="observation-form" action="/submit-form" method="POST">
         <div class="form-group">
             <label for="date-time">Date/Time:</label>
             <input type="datetime-local" id="date-time" name="date_time" required>
         </div>
         <div class="form-group">
-            <label for="store-number">AR Store Number/Location:</label>
+            <label for="store-number">Store Number/Location:</label>
             <input type="text" id="store-number" name="store_number" required>
         </div>
         <div class="form-group">
-            <label for="observer-name">AR Observer Name:</label>
+            <label for="observer-name">Observer Name:</label>
             <input type="text" id="observer-name" name="observer_name" required>
         </div>
         <div class="form-group">
-            <label for="advocate-name">AR Advocate Name:</label>
+            <label for="advocate-name">Advocate Name:</label>
             <input type="text" id="advocate-name" name="advocate_name" required>
         </div>
+ <!-- New Section: 10 Boxes -->
+ <div class="form-group">
+    <label for="activations">Activations:</label>
+    <input type="text" id="activations" name="activations" placeholder="Enter Activations">
+</div>
 
+<div class="form-group">
+    <label for="upgrades">Upgrades:</label>
+    <input type="text" id="upgrades" name="upgrades" placeholder="Enter Upgrades">
+</div>
+
+<div class="form-group">
+    <label for="rpm">$60 RPM:</label>
+    <input type="text" id="rpm" name="rpm" placeholder="Enter $60 RPM">
+</div>
+
+<div class="form-group">
+    <label for="ppp-apps">PPP Apps:</label>
+    <input type="text" id="ppp-apps" name="ppp_apps" placeholder="Enter PPP Apps">
+</div>
+
+<div class="form-group">
+    <label for="wtr">WTR:</label>
+    <input type="text" id="wtr" name="wtr" placeholder="Enter WTR">
+</div>
+
+<div class="form-group">
+    <label for="autopay">AutoPay:</label>
+    <input type="text" id="autopay" name="autopay" placeholder="Enter AutoPay">
+</div>
+
+<div class="form-group">
+    <label for="cricket-protect">Cricket Protect:</label>
+    <input type="text" id="cricket-protect" name="cricket_protect" placeholder="Enter Cricket Protect">
+</div>
+
+<div class="form-group">
+    <label for="apo">APO:</label>
+    <input type="text" id="apo" name="apo" placeholder="Enter APO">
+</div>
+
+<div class="form-group">
+    <label for="max-box">Max:</label>
+    <input type="text" id="max-box" name="max_box" placeholder="Enter Max">
+</div>
+
+<div class="form-group">
+    <label for="aia-checks">AIA Checks:</label>
+    <input type="text" id="aia-checks" name="aia_checks" placeholder="Enter AIA Checks">
+</div>
         <h2>Observation Questions</h2>
 
         <div class="form-group">
@@ -45,14 +94,7 @@
                 <option value="no">No</option>
             </select>
         </div>
-        <div class="form-group">
-            <label for="greet-10feet">Greet the customer within 10 feet and within 10 seconds?</label>
-            <select id="greet-10feet" name="greet_10feet" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
+    
         <div class="form-group">
             <label for="uncover-needs">Ask at least 3 effective questions to understand the customer’s needs?</label>
             <select id="uncover-needs" name="uncover_needs" required>
@@ -134,6 +176,22 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="max-setup-tested">Was Max setup and tested?</label>
+            <select id="max-setup-tested" name="max_setup_tested" required>
+              <option value="">Select</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="aia-offered-addressed">Was AIA offered and addressed/checked?</label>
+            <select id="aia-offered-addressed" name="aia_offered_addressed" required>
+              <option value="">Select</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+        <div class="form-group">
             <label for="assist-setup">Offer to assist with the customer’s phone setup (including content transfer)?</label>
             <select id="assist-setup" name="assist_setup" required>
                 <option value="">Select</option>
@@ -149,22 +207,8 @@
                 <option value="no">No</option>
             </select>
         </div>
-        <div class="form-group">
-            <label for="help-anything-else">Ask if they can help with anything else?</label>
-            <select id="help-anything-else" name="help_anything_else" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="use-name-thank">Use the customer’s name and thank them for being a customer?</label>
-            <select id="use-name-thank" name="use_name_thank" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
+                
+    
         <div class="form-group">
             <label for="walk-to-door">Walk the customer to the door?</label>
             <select id="walk-to-door" name="walk_to_door" required>
@@ -181,23 +225,7 @@
                 <option value="no">No</option>
             </select>
         </div>
-        <div class="form-group">
-            <label for="hassle-free">Create a hassle-free customer experience?</label>
-            <select id="hassle-free" name="hassle_free" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="use-name-3times">Use their name at least 3 times during the interaction?</label>
-            <select id="use-name-3times" name="use_name_3times" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-
+      
         <div class="form-group">
             <label for="comments">Comments:</label>
             <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
