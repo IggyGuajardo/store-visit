@@ -3,289 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Observation Form</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #218838;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+        .create-account-link {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .create-account-link a {
+            color: #28a745;
+            text-decoration: none;
+        }
+        .create-account-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Reemo Store Visit Form</h1>
-    <form id="observation-form" action="/submit-form" method="POST">
-        <div class="form-group">
-            <label for="date-time">Date/Time:</label>
-            <input type="datetime-local" id="date-time" name="date_time" required>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div id="error-message" class="error-message"></div>
+        <div class="create-account-link">
+            <p>Don't have an account? <a href="create-account.html">Create one</a></p>
         </div>
-        <div class="form-group">
-            <label for="store-number">Store Number/Location:</label>
-            <input type="text" id="store-number" name="store_number" required>
-        </div>
-        <div class="form-group">
-            <label for="observer-name">Observer Name:</label>
-            <input type="text" id="observer-name" name="observer_name" required>
-        </div>
-        <div class="form-group">
-            <label for="advocate-name">Advocate Name:</label>
-            <input type="text" id="advocate-name" name="advocate_name" required>
-        </div>
+    </div>
 
-        <!-- New Section: 10 Boxes -->
-        <div class="form-group">
-            <label for="activations">Activations:</label>
-            <input type="text" id="activations" name="activations" placeholder="Enter Activations">
-        </div>
+    <script>
+        // Hardcoded username and password (not secure)
+        const validUsername = "user";
+        const validPassword = "password";
 
-        <div class="form-group">
-            <label for="upgrades">Upgrades:</label>
-            <input type="text" id="upgrades" name="upgrades" placeholder="Enter Upgrades">
-        </div>
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
 
-        <div class="form-group">
-            <label for="rpm">$60 RPM:</label>
-            <input type="text" id="rpm" name="rpm" placeholder="Enter $60 RPM">
-        </div>
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
 
-        <div class="form-group">
-            <label for="ppp-apps">PPP Apps:</label>
-            <input type="text" id="ppp-apps" name="ppp_apps" placeholder="Enter PPP Apps">
-        </div>
-
-        <div class="form-group">
-            <label for="wtr">WTR:</label>
-            <input type="text" id="wtr" name="wtr" placeholder="Enter WTR">
-        </div>
-
-        <div class="form-group">
-            <label for="autopay">AutoPay:</label>
-            <input type="text" id="autopay" name="autopay" placeholder="Enter AutoPay">
-        </div>
-
-        <div class="form-group">
-            <label for="cricket-protect">Cricket Protect:</label>
-            <input type="text" id="cricket-protect" name="cricket_protect" placeholder="Enter Cricket Protect">
-        </div>
-
-        <div class="form-group">
-            <label for="apo">APO:</label>
-            <input type="text" id="apo" name="apo" placeholder="Enter APO">
-        </div>
-
-        <div class="form-group">
-            <label for="max-box">Max:</label>
-            <input type="text" id="max-box" name="max_box" placeholder="Enter Max">
-        </div>
-
-        <div class="form-group">
-            <label for="aia-checks">AIA Checks:</label>
-            <input type="text" id="aia-checks" name="aia_checks" placeholder="Enter AIA Checks">
-        </div>
-
-        <h2>Observation Questions</h2>
-
-        <div class="form-group">
-            <label for="warmly-welcome">Warmly welcome the customer?</label>
-            <select id="warmly-welcome" name="warmly_welcome" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="acknowledge-greet">Acknowledge and greet the customer (including exchange names)?</label>
-            <select id="acknowledge-greet" name="acknowledge_greet" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="greet-10feet">Greet the customer within 10 feet and within 10 seconds?</label>
-            <select id="greet-10feet" name="greet_10feet" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="uncover-needs">Ask at least 3 effective questions to understand the customer’s needs?</label>
-            <select id="uncover-needs" name="uncover_needs" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="listen-attention">Listen and provide their undivided attention?</label>
-            <select id="listen-attention" name="listen_attention" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="review-account">Review the customer’s account? (if existing customer)</label>
-            <select id="review-account" name="review_account" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="recommend-phone-options">Recommend 2 personalized phone options (needs and wants) and 2 ways to pay (upfront or device financing option)?</label>
-            <select id="recommend-phone-options" name="recommend_phone_options" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="recommend-rate-plan">Recommend a personalized rate plan?</label>
-            <select id="recommend-rate-plan" name="recommend_rate_plan" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="recommend-accessories">Recommend personalized accessories?</label>
-            <select id="recommend-accessories" name="recommend_accessories" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="recommend-features">Recommend personalized features? (Cricket Protect, International)</label>
-            <select id="recommend-features" name="recommend_features" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="ask-sale">Ask for the sale?</label>
-            <select id="ask-sale" name="ask_sale" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="overcome-objections">Attempt to overcome any objections?</label>
-            <select id="overcome-objections" name="overcome_objections" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="discuss-mycricket">Discuss myCricket App?</label>
-            <select id="discuss-mycricket" name="discuss_mycricket" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="max-setup-tested">Was Max setup and tested?</label>
-            <select id="max-setup-tested" name="max_setup_tested" required>
-              <option value="">Select</option>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="aia-offered-addressed">Was AIA offered and addressed/checked?</label>
-            <select id="aia-offered-addressed" name="aia_offered_addressed" required>
-              <option value="">Select</option>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-          </div>
-        <div class="form-group">
-            <label for="assist-setup">Offer to assist with the customer’s phone setup (including content transfer)?</label>
-            <select id="assist-setup" name="assist_setup" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="educate-bill-cycle">Educate customer on bill cycle and payment options (including AutoPay)?</label>
-            <select id="educate-bill-cycle" name="educate_bill_cycle" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="help-anything-else">Ask if they can help with anything else?</label>
-            <select id="help-anything-else" name="help_anything_else" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="use-name-thank">Use the customer’s name and thank them for being a customer?</label>
-            <select id="use-name-thank" name="use_name_thank" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="walk-to-door">Walk the customer to the door?</label>
-            <select id="walk-to-door" name="walk_to_door" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="positive-attitude">Display a positive “I can help you with that” attitude?</label>
-            <select id="positive-attitude" name="positive_attitude" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="hassle-free">Create a hassle-free customer experience?</label>
-            <select id="hassle-free" name="hassle_free" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="use-name-3times">Use their name at least 3 times during the interaction?</label>
-            <select id="use-name-3times" name="use_name_3times" required>
-                <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="comments">Comments:</label>
-            <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="what-went-well">What went well:</label>
-            <textarea id="what-went-well" name="what_went_well" rows="4" cols="50"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="opportunities">What are the opportunities:</label>
-            <textarea id="opportunities" name="opportunities" rows="4" cols="50"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="next-review-date">Next Review Date:</label>
-            <input type="date" id="next-review-date" name="next_review_date" required>
-        </div>
-
-        <button type="submit" class="submit-btn">Submit</button>
-    </form>
+            if (username === validUsername && password === validPassword) {
+                // Redirect to the main page after successful login
+                window.location.href = "form.html";
+            } else {
+                // Show error message
+                document.getElementById("error-message").textContent = "Invalid username or password.";
+            }
+        });
+    </script>
 </body>
 </html>
