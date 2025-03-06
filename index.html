@@ -65,7 +65,7 @@
     <div class="login-container">
         <h2>Login</h2>
         <form id="login-form">
-            <input type="text" id="username" placeholder="Username" required>
+            <input type="email" id="email" placeholder="Email" required>
             <input type="password" id="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
@@ -75,24 +75,43 @@
         </div>
     </div>
 
-    <script>
-        // Hardcoded username and password (not secure)
-        const validUsername = "user";
-        const validPassword = "password";
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDLeAchI7HNLPVbY_TRvfE07n4_fS5gSBU",
+            authDomain: "store-visit-ff312.firebaseapp.com",
+            projectId: "store-visit-ff312",
+            storageBucket: "store-visit-ff312.firebasestorage.app",
+            messagingSenderId: "435743653627",
+            appId: "1:435743653627:web:b30329fe2d66e93a027a5e",
+            measurementId: "G-LQRYF992WG"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Handle form submission
         document.getElementById("login-form").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent form submission
 
-            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
 
-            if (username === validUsername && password === validPassword) {
-                // Redirect to the main page after successful login
-                window.location.href = "form.html";
-            } else {
-                // Show error message
-                document.getElementById("error-message").textContent = "Invalid username or password.";
-            }
+            // Sign in with Firebase
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Redirect to the form page after successful login
+                    window.location.href = "form.html";
+                })
+                .catch((error) => {
+                    // Show error message
+                    document.getElementById("error-message").textContent = error.message;
+                });
         });
     </script>
 </body>

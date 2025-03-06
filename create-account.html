@@ -5,44 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+        /* Your CSS styles here */
         .create-account-container {
-            background-color: #fff;
+            max-width: 400px;
+            margin: 0 auto;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
-        }
-        .create-account-container h2 {
-            margin-bottom: 20px;
-        }
-        .create-account-container input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .create-account-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .create-account-container button:hover {
-            background-color: #218838;
+            border-radius: 5px;
+            background-color: #f9f9f9;
         }
         .error-message {
             color: red;
@@ -50,14 +20,7 @@
         }
         .login-link {
             margin-top: 15px;
-            font-size: 14px;
-        }
-        .login-link a {
-            color: #28a745;
-            text-decoration: none;
-        }
-        .login-link a:hover {
-            text-decoration: underline;
+            text-align: center;
         }
     </style>
 </head>
@@ -65,7 +28,7 @@
     <div class="create-account-container">
         <h2>Create Account</h2>
         <form id="create-account-form">
-            <input type="text" id="new-username" placeholder="Username" required>
+            <input type="email" id="new-email" placeholder="Email" required>
             <input type="password" id="new-password" placeholder="Password" required>
             <input type="password" id="confirm-password" placeholder="Confirm Password" required>
             <button type="submit">Create Account</button>
@@ -76,26 +39,49 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDLeAchI7HNLPVbY_TRvfE07n4_fS5gSBU",
+            authDomain: "store-visit-ff312.firebaseapp.com",
+            projectId: "store-visit-ff312",
+            storageBucket: "store-visit-ff312.firebasestorage.app",
+            messagingSenderId: "435743653627",
+            appId: "1:435743653627:web:b30329fe2d66e93a027a5e",
+            measurementId: "G-LQRYF992WG"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Handle form submission
         document.getElementById("create-account-form").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent form submission
 
-            const newUsername = document.getElementById("new-username").value;
-            const newPassword = document.getElementById("new-password").value;
+            const email = document.getElementById("new-email").value;
+            const password = document.getElementById("new-password").value;
             const confirmPassword = document.getElementById("confirm-password").value;
 
-            if (newPassword !== confirmPassword) {
+            // Check if passwords match
+            if (password !== confirmPassword) {
                 document.getElementById("error-message").textContent = "Passwords do not match.";
                 return;
             }
 
-            // For now, just log the new account details (you can replace this with actual account creation logic)
-            console.log("New Account Created:");
-            console.log("Username:", newUsername);
-            console.log("Password:", newPassword);
-
-            // Redirect to the login page after account creation
-            window.location.href = "index.html";
+            // Create user with Firebase
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("Account created successfully!");
+                    window.location.href = "index.html"; // Redirect to login page
+                })
+                .catch((error) => {
+                    document.getElementById("error-message").textContent = error.message;
+                });
         });
     </script>
 </body>
